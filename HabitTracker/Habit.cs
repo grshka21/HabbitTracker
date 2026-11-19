@@ -39,15 +39,15 @@ namespace HabitTracker
             if (parts.Length != 3)
                 throw new FormatException($"Неверное количество полей в строке: {line}");
 
-            string name = parts.Trim();
+            string name = parts[0].Trim();
             if (string.IsNullOrEmpty(name))
                 throw new FormatException("Имя привычки не может быть пустым.");
 
-            if (!int.TryParse(parts, out int streak) || streak < 0)
-                throw new FormatException($"Некорректное значение серии дней: {parts}");
+            if (!int.TryParse(parts[1], out int streak) || streak < 0)
+                throw new FormatException($"Некорректное значение серии дней: {parts[1]}");
 
-            if (!bool.TryParse(parts, out bool isCompleted))
-                throw new FormatException($"Некорректное булево значение: {parts}");
+            if (!bool.TryParse(parts[2], out bool isCompleted))
+                throw new FormatException($"Некорректное булево значение: {parts[2]}");
 
             return new Habit(name, streak, isCompleted);
         }
